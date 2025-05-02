@@ -1,0 +1,11 @@
+{% if latest_questions_list %}
+    <ul>
+    {% for question in latest_questions_list %}
+        <li><a href="{% url 'poll:question-detail' question.id %}">{{ question.text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+<a href="https://google.com">Click link to move to google</a>
+<i>Italics</i>
