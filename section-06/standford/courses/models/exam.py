@@ -7,3 +7,6 @@ class Exam(Model):
     total_marks = IntegerField()
     date = DateTimeField()
     duration_minutes = IntegerField()
+
+    def __str__(self) -> str:
+        return self.title
