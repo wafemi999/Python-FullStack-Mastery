@@ -3,7 +3,7 @@ from courses.models.course import Course
 
 class Exam(Model):
     course = ForeignKey(Course, on_delete=CASCADE)
-    title = CharField(max_length=50)
+    title = SlugField(primary_key=True)
     total_marks = IntegerField()
     date = DateTimeField()
     duration_minutes = IntegerField()

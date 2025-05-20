@@ -1,10 +1,51 @@
+from wsgiref.validate import validator
 from rest_framework.serializers import *
+from rest_framework.validators import UniqueValidator, UniqueTogetherValidator
 from courses.models.course import Course
 
 class CourseSerializer(Serializer):
-    name = CharField(max_length=100)
-    code = CharField()
+    id = IntegerField(read_only=True)
+    name = CharField(
+        max_length=100,
+        validators=[
+            UniqueValidator(
+                queryset=Course.objects.all(),
+                message="Course name must be unique"
+            )
+        ]
+    )
+    code = CharField(
+        validators=[
+            UniqueValidator(
+                queryset=Course.objects.all(),
+                message="Code must be unique"
+            )
+        ]
+    )
     description = CharField(max_length=600)
+
+    # fucntion based validator
+    def validate_description(self, value):
+        """This method validates the description field and ensures there's no swear words -> fuck, shit """
+        if value.count("shit") or value.count("fuck") :
+            raise ValidationError("Course description violates standford standard")
+        return value
+
+    def validate_code(self, value):
+        """This method checks if course code starts with CSC """
+        if not value.startswith("CSC")  :
+            raise ValidationError("Course code must start with CSC")
+        return value
+
+    # class Meta:
+    #     validators = [
+    #         UniqueTogetherValidator(
+    #             queryset=Course.objects.all(),
+    #             fields=['name', 'code'],
+    #             message="Every course must have a unique name and code"
+    #         )
+    #     ]
+
 
     def create(self, validated_data):
         """
