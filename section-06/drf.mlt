@@ -4,8 +4,8 @@
   <playlist id="main_bin">
     <property name="xml_retain">1</property>
   </playlist>
-  <producer id="black" in="00:00:00.000" out="00:09:15.100">
-    <property name="length">00:09:15.133</property>
+  <producer id="black" in="00:00:00.000" out="00:09:15.133">
+    <property name="length">00:09:15.167</property>
     <property name="eof">pause</property>
     <property name="resource">0</property>
     <property name="aspect_ratio">1</property>
@@ -14,7 +14,7 @@
     <property name="set.test_audio">0</property>
   </producer>
   <playlist id="background">
-    <entry producer="black" in="00:00:00.000" out="00:09:15.100"/>
+    <entry producer="black" in="00:00:00.000" out="00:09:15.133"/>
   </playlist>
   <chain id="chain0" out="00:10:22.800">
     <property name="length">00:10:22.833</property>
@@ -1190,13 +1190,45 @@
     <entry producer="chain16" in="00:08:47.067" out="00:09:03.333"/>
     <entry producer="chain17" in="00:09:06.800" out="00:10:19.967"/>
   </playlist>
-  <tractor id="tractor0" title="Shotcut version 24.01.31" in="00:00:00.000" out="00:09:15.100">
+  <chain id="chain18" out="00:09:15.133">
+    <property name="length">00:09:15.167</property>
+    <property name="eof">pause</property>
+    <property name="resource">/Users/mac/Downloads/drf-esv2-90p-bg-10p.mp3</property>
+    <property name="mlt_service">avformat-novalidate</property>
+    <property name="meta.media.nb_streams">1</property>
+    <property name="meta.media.0.stream.type">audio</property>
+    <property name="meta.media.0.codec.sample_fmt">fltp</property>
+    <property name="meta.media.0.codec.sample_rate">48000</property>
+    <property name="meta.media.0.codec.channels">1</property>
+    <property name="meta.media.0.codec.name">mp3float</property>
+    <property name="meta.media.0.codec.long_name">MP3 (MPEG audio layer 3)</property>
+    <property name="meta.media.0.codec.bit_rate">64000</property>
+    <property name="meta.attr.encoder.markup">Lavf61.1.100</property>
+    <property name="seekable">1</property>
+    <property name="audio_index">0</property>
+    <property name="video_index">-1</property>
+    <property name="creation_time">2025-05-20T20:23:45</property>
+    <property name="astream">0</property>
+    <property name="shotcut:skipConvert">0</property>
+    <property name="shotcut:hash">d09c4c02ae11ea147e2c25672696d39b</property>
+    <property name="ignore_points">0</property>
+    <property name="shotcut:caption">drf-esv2-90p-bg-10p.mp3</property>
+    <property name="xml">was here</property>
+  </chain>
+  <playlist id="playlist1">
+    <property name="shotcut:audio">1</property>
+    <property name="shotcut:name">A1</property>
+    <entry producer="chain18" in="00:00:00.000" out="00:09:15.133"/>
+  </playlist>
+  <tractor id="tractor0" title="Shotcut version 24.01.31" in="00:00:00.000" out="00:09:15.133">
     <property name="shotcut">1</property>
     <property name="shotcut:projectAudioChannels">2</property>
     <property name="shotcut:projectFolder">0</property>
-    <property name="shotcut:scaleFactor">0.691472</property>
+    <property name="shotcut:scaleFactor">0.031952</property>
+    <property name="shotcut:skipConvert">0</property>
     <track producer="background"/>
-    <track producer="playlist0"/>
+    <track producer="playlist0" hide="audio"/>
+    <track producer="playlist1" hide="video"/>
     <transition id="transition0">
       <property name="a_track">0</property>
       <property name="b_track">1</property>
@@ -1211,6 +1243,13 @@
       <property name="mlt_service">frei0r.cairoblend</property>
       <property name="threads">0</property>
       <property name="disable">1</property>
+    </transition>
+    <transition id="transition2">
+      <property name="a_track">0</property>
+      <property name="b_track">2</property>
+      <property name="mlt_service">mix</property>
+      <property name="always_active">1</property>
+      <property name="sum">1</property>
     </transition>
   </tractor>
 </mlt>

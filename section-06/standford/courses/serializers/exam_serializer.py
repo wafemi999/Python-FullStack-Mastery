@@ -3,7 +3,6 @@ from courses.models.exam import Exam
 from courses.serializers.course_serializer import CourseSerializer
 
 class ExamSerializer(Serializer):
-    course = CourseSerializer(read_only=True)
     course_id = IntegerField()
     title = SlugField()
     total_marks = IntegerField()

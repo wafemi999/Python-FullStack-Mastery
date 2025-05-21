@@ -23,6 +23,8 @@ class CourseSerializer(Serializer):
         ]
     )
     description = CharField(max_length=600)
+    # exams = HyperlinkedRelatedField(many=True, read_only=True, view_name='courses:exam-detail')
+    exams = StringRelatedField(many=True)
 
     # fucntion based validator
     def validate_description(self, value):

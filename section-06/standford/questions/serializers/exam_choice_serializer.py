@@ -6,3 +6,4 @@ class ExamChoiceSerializer(ModelSerializer):
         fields = ['question', 'choice_text', 'is_correct']
         model = ExamChoice
         depth = 0
+
