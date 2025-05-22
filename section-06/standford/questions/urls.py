@@ -9,6 +9,6 @@ urlpatterns = [
     path('<int:pk>', ExamQuestionDetailUpdateDeleteView.as_view(), name='exam-questions-detail'),
 
     # exam questions-choices patterns
-    path('choices/all', ExamChoiceListCreateView.as_view(), name='exam-choices-list'),
+    path('choices/all/<int:pk>', ExamChoiceListCreateView.as_view(), name='exam-choices-list'),
     path('choices/<int:pk>', ExamChoiceDetailUpdateDeleteView.as_view(), name='exam-choice-detail')
 ]

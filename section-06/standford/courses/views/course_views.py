@@ -1,6 +1,6 @@
-from lib2to3.refactor import get_all_fix_names
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view, throttle_classes, permission_classes, authentication_classes
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.status import *
 from django.shortcuts import get_object_or_404
@@ -81,4 +81,6 @@ class CourseDetailUpdateDeleteView(APIView):
         return Response({"status" : "Course deleted sucessfully"}, status=HTTP_204_NO_CONTENT)
 
 
-# List Create Update Delete -> CRUD
+class CoursesViewSet(ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
