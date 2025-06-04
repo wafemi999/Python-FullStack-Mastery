@@ -6,10 +6,21 @@ class LoginSerializer(Serializer):
     password = CharField(write_only=True)
 
     def validate(self, data):
-        user = authenticate(data['username'], data['password'])
-        if user:
-            return "Login successfullly"
-        else:
-            return  "Password or username or both are invalid"
+        user = authenticate(username=data['username'], password=data['password'])
+        if not user:
+            raise ValidationError('Username or password is invalid')
+        if not user.is_active:
+            raise ValidationError('User is not active')
+        data['user'] = user
+        return data
+
+
+        # {
+        #     'username' : 'philip',
+        #     'password' : 'luke456'
+        #     'user' : {
+        # }
+        # }
         
+
         

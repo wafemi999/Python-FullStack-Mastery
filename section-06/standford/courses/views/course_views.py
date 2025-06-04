@@ -6,7 +6,8 @@ from rest_framework.status import *
 from django.shortcuts import get_object_or_404
 from courses.models.course import Course
 from courses.serializers.course_serializer import CourseSerializer
-
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET', 'POST'])
 def course_list(request):
@@ -84,3 +85,5 @@ class CourseDetailUpdateDeleteView(APIView):
 class CoursesViewSet(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    # authentication_classes = [TokenAuthentication]
+

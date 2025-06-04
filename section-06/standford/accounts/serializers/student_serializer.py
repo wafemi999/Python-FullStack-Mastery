@@ -1,8 +1,7 @@
 from rest_framework.serializers import *
-from accounts.serializers.user_serializer import UserSerializer
+from accounts.models.student import Student
 
 class StudentSerializer(ModelSerializer):
-    user = UserSerializer()
-
     class Meta:
+        model = Student
         fields = ['user', 'student_id']
