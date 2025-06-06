@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'django_filters',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
     'courses',
     'questions',
-    'accounts'
+    'accounts',
+    'results',
 ]
 
 MIDDLEWARE = [
@@ -136,10 +140,30 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PERMISSION_CLASSES' : [
         'rest_framework.permissions.IsAuthenticated'
-    ]
+    ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'accounts.throttles.custom_throttles.UserRequestPerMinute',
+        'accounts.throttles.custom_throttles.UserRequestPerDay',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'minute' : '10/min',
+        'day' : '100/day'
+    },
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 2,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
 }
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Standford Portal API',
+    'DESCRIPTION': 'This is the first version of standford portal project',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
 }

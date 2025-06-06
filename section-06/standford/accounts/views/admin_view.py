@@ -8,4 +8,3 @@ class AdminsViewSet(ModelViewSet):
     serializer_class = AdminSerializer
     permission_classes = [IsAdminUser]
     http_method_names = ['get', 'list', 'put', 'patch', 'delete']
-
